@@ -1,0 +1,87 @@
+﻿@model Spice.Models.ViewModels.CouponViewModel
+@{
+    ViewData["Title"] = "Edit";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+
+}
+
+<br />
+<h2 class="text-info">Edit Coupon</h2>
+@if (Model.dataUrl !="")
+{
+    <img src="@Model.dataUrl">
+
+}
+
+<br />
+<br />
+
+<form method="post" enctype="multipart/form-data">
+    <div class="backgroundWhiteBorder">
+        <input type="hidden" asp-for="Coupon.Id" />
+        <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+        <div class="form-group row">
+            <div class="col-2">
+                <label asp-for="Coupon.Name" class="col-form-label"></label>
+            </div>
+            <div class="col-5">
+                <input asp-for="Coupon.Name" class="form-control" />
+            </div>
+            <span asp-validation-for="Coupon.Name" class="text-danger"></span>
+        </div>
+        <div class="form-group row">
+            <div class="col-2">
+                <label asp-for="Coupon.Picture" class="col-form-label"></label>
+            </div>
+            <div class="col-5">
+                <input type="file" id="projectImage" name="files" multiple class="form-control" />
+            </div>
+
+        </div>
+        <div class="form-group row">
+            <div class="col-2">
+                <label asp-for="Coupon.CouponType" class="col-form-label"></label>
+            </div>
+            <div class="col-5">
+                <select asp-for="Coupon.CouponType" asp-items="Html.GetEnumSelectList<Coupon.eCouponType>()" class="form-control"></select>
+            </div>
+
+        </div>
+        <div class="form-group row">
+            <div class="col-2">
+                <label asp-for="Coupon.Discount" class="col-form-label"></label>
+            </div>
+            <div class="col-5">
+                <input asp-for="Coupon.Discount" class="form-control" />
+            </div>
+            <span asp-validation-for="Coupon.Discount" class="text-danger"></span>
+        </div>
+        <div class="form-group row">
+            <div class="col-2">
+                <label asp-for="Coupon.MinimalAmount" class="col-form-label"></label>
+            </div>
+            <div class="col-5">
+                <input asp-for="Coupon.MinimalAmount" class="form-control" />
+            </div>
+            <span asp-validation-for="Coupon.MinimalAmount" class="text-danger"></span>
+        </div>
+        <div class="form-group row">
+            <div class="col-2">
+                <label asp-for="Coupon.isActive" class="col-form-label"></label>
+            </div>
+            <div class="col-5">
+                <input type="checkbox" asp-for="Coupon.isActive" class="form-control" />
+            </div>
+            <span asp-validation-for="Coupon.isActive" class="text-danger"></span>
+        </div>
+        <div class="form-group row">
+            <div class="col-5 offset-2">
+                <partial name="_EditAndBackToListButton" model="Model.Coupon.Id" />
+            </div>
+        </div>
+    </div>
+</form>
+
+@section Scripts{
+    @{ await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}
